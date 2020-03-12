@@ -1,0 +1,58 @@
+%% compile temporaries
+*.o
+*.a
+*.so
+callgrind.out.*
+
+%% EXECUTABLE
+*.exe
+
+
+%% IDE temporaries
+.*.config
+.*.creator
+.*.creator.user*
+.*.files
+.*.includes
+
+%% git
+*.orig
+
+
+# PYTHON
+*.pyc
+_*.py
+
+
+# EXECUTION
+core
+CORE
+*.log
+
+
+%% BACKUP/temporary files
+*.tmp
+*.dat
+nogit*
+*~
+z.*
+z/
+MT.log
+.#*#
+.#*
+#*#
+
+
+%% MAKE
+Makefile.dep
+Make.lock
+.lastMake
+makefile
+
+
+%% CMAKE
+CMakeCache.txt
+CMakeFiles
+cmake_install.cmake
+CMakeLists.txt.user
+CTestTestfile.cmake

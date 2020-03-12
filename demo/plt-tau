@@ -1,0 +1,14 @@
+set title
+set key left top
+set ylabel "{/Symbol t} [sec]"
+set xlabel "step t"
+
+plot 'z.energy' us 0:1 w l lt 1 dt 1 not
+
+set terminal push
+#set terminal pdfcairo fontscale 0.7
+#set terminal pngcairo dashed
+set terminal pdfcairo font 'helvetica,16' enhanced
+set output 'data/bounceTau.pdf'
+replot
+set terminal pop
