@@ -27,7 +27,7 @@ cd 20-IROS-ForceBased
 git submodule init
 git submodule update
 
-make -j1 initUbuntuPackages  # calls sudo apt-get install; you can always interrupt
+make -j1 installUbuntuAll    # calls sudo apt-get install; you can always interrupt
 make                         # builds libs
 cd demo; make; ./x.exe       # run the demo
 ```
