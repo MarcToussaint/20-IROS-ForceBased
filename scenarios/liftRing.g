@@ -10,11 +10,6 @@ box (table){
     joint:rigid
 }
 
-#target2 (table){
-#    shape:ssBox, Q:<t(.2 0. .25)>, size:[.2 .2 .2 .02], color:[.0 .6 .0]
-#    joint:rigid
-#}
-
 ring (box){
     Q:<t(0 0 .2)>
 }

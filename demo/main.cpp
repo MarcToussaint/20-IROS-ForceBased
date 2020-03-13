@@ -8,7 +8,7 @@
 //===========================================================================
 
 void solve(KOMO& komo, const Skeleton& S){
-//  komo.animateOptimization = 1;
+//  komo.animateOptimization = 4;
   komo.verbose=4;
 //  komo.reportProblem();
 
@@ -46,10 +46,10 @@ void solve(KOMO& komo, const Skeleton& S){
 //===========================================================================
 
 void passive_ballBounce(){
-  rai::KinematicWorld K;
+  rai::Configuration K;
   K.addFrame("base");
-  K.addObject("floor", NULL, rai::ST_ssBox, {1., 1., .1, .02}, {}, {0., .0,.5});
-  auto b = K.addObject("ball",  NULL, rai::ST_sphere, {.05}, {}, {.0, .0, 1.});
+  K.addObject("floor", nullptr, rai::ST_ssBox, {1., 1., .1, .02}, {}, {0., .0,.5});
+  auto b = K.addObject("ball",  nullptr, rai::ST_sphere, {.05}, {}, {.0, .0, 1.});
 //  auto I = new rai::Inertia(*b);
 //  I->mass = 1.;
 //  I->defaultInertiaByShape();
@@ -74,10 +74,10 @@ void passive_ballBounce(){
 //===========================================================================
 
 void passive_elasticBounce(){
-  rai::KinematicWorld K;
+  rai::Configuration K;
   K.addFrame("base");
-  K.addObject("floor", NULL, rai::ST_ssBox, {1., 1., .1, .02}, {}, {0.,-.6,.5}, {1., .1, 0., 0.});
-  K.addObject("ball",  NULL, rai::ST_ssBox, {.0, .4, .1, .05}, {}, {.0, .0, 1.05});
+  K.addObject("floor", nullptr, rai::ST_ssBox, {1., 1., .1, .02}, {}, {0.,-.6,.5}, {1., .1, 0., 0.});
+  K.addObject("ball",  nullptr, rai::ST_ssBox, {.0, .4, .1, .05}, {}, {.0, .0, 1.05});
 
   Skeleton S = {
     { 0., .1, SY_magicTrans, {"ball"} },
@@ -96,9 +96,9 @@ void passive_elasticBounce(){
 //===========================================================================
 
 void passive_complementarySlide(){
-  rai::KinematicWorld K;
-  K.addObject("floor", NULL, rai::ST_ssBox, {1., 1., .1, .02}, {}, {0.,.5,.5}, {1., .1, 0., 0.});
-  K.addObject("box",  NULL, rai::ST_ssBox, {.4, .4, .2, .05}, {}, {.0, .0, .65}, {1., .1, 0., 0.3});
+  rai::Configuration K;
+  K.addObject("floor", nullptr, rai::ST_ssBox, {1., 1., .1, .02}, {}, {0.,.5,.5}, {1., .1, 0., 0.});
+  K.addObject("box",  nullptr, rai::ST_ssBox, {.4, .4, .2, .05}, {}, {.0, .0, .65}, {1., .1, 0., 0.3});
 
   Skeleton S = {
     { 0., 1., SY_dynamic, {"box"} },
@@ -117,9 +117,9 @@ void passive_complementarySlide(){
 //===========================================================================
 
 void passive_stickyTumbling(){
-  rai::KinematicWorld K;
-  K.addObject("floor", NULL, rai::ST_ssBox, {1., 1., .1, .02}, {}, {0.,0., .5}, {1., .3, 0., 0.});
-  K.addObject("box",  NULL, rai::ST_ssBox, {.4, .2, .4, .05}, {}, {.0, .0, 1.1}, {1., 0., 0., .3});
+  rai::Configuration K;
+  K.addObject("floor", nullptr, rai::ST_ssBox, {1., 1., .1, .02}, {}, {0.,0., .5}, {1., .3, 0., 0.});
+  K.addObject("box",  nullptr, rai::ST_ssBox, {.4, .2, .4, .05}, {}, {.0, .0, 1.1}, {1., 0., 0., .3});
 
   Skeleton S = {
     { 0., 1., SY_dynamic, {"box"} },
@@ -163,7 +163,7 @@ template<> const char* rai::Enum<Scenario>::names [] = {
 };
 
 void scenario(Scenario s){
-  rai::KinematicWorld C;
+  rai::Configuration C;
   C.addFile(STRING("../scenarios/" <<rai::Enum<Scenario>(s) <<".g"));
   C.watch();
 
@@ -331,18 +331,18 @@ void scenario(Scenario s){
 
 
   if(s==bookOnShelf){
-    komo.addObjective({3., -1.}, OT_sos, FS_scalarProductXY, {"gripper", "box"}, {1e1}, {-1.});
-//    komo.addObjective({2.5, -1.}, OT_sos, FS_scalarProductXX, {"gripper", "box"}, {1e1});
-//    komo.addObjective({2.5, -1.}, OT_sos, FS_scalarProductXZ, {"gripper", "box"}, {1e1});
+    komo.addObjective({3., -1.}, FS_scalarProductXY, {"gripper", "box"}, OT_sos, {1e1}, {-1.});
+//    komo.addObjective({2.5, -1.}, FS_scalarProductXX, {"gripper", "box"}, OT_sos, {1e1});
+//    komo.addObjective({2.5, -1.}, FS_scalarProductXZ, {"gripper", "box"}, OT_sos, {1e1});
   }
 //  if(s==forceGrasp){
-//    komo.addObjective({0., -1.}, OT_ineq, FS_jointLimits, {}, {1e1}, {1e1});
+//    komo.addObjective({}, FS_jointLimits, {}, OT_ineq, {1e1}, {1e1});
 //  }
 
 
 
   for(uint i=0;i<collisions.N;i+=2){
-    komo.addObjective({0,maxPhase+.5}, OT_ineq, FS_distance, {collisions(i), collisions(i+1)}, {1e1});
+    komo.addObjective({0,maxPhase+.5}, FS_distance, {collisions(i), collisions(i+1)}, OT_ineq, {1e1});
   }
 
   solve(komo, S);

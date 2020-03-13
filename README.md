@@ -10,13 +10,15 @@ Please also see the [supplementary video](https://www.youtube.com/watch?v=YxKuVi
 
 The repository checks out [rai](https://github.com/MarcToussaint/rai/) (as submodule) and allows you to reproduce the experiments.
 
-## Bugs
+## Versions
 
-When going through all examples, the demo code (in branch
-19-ICRA-submission) sometimes raises a "timeout to end Thread::main of
-'GlfwSpinnerSpi'" issue. Perhaps pick only individual examples in
-main.cpp. Also note, that the computed trajectories depend on the
-random seed.
+The 19-ICRA-submission branch contains the literal verion used to
+generate the experiments in the paper (and sometimes raises a "timeout
+to end Thread::main of 'GlfwSpinnerSpi'" when going through all
+examples). The master branch instead uses a newer version of the rai
+submodule. There, the push-with-stick examples converge somewhat worse (one
+should tune other solver parameters in rai.cfg for these). Note that the
+computed trajectories depend on the random seed!
 
 ## Quick Start
 
@@ -32,4 +34,8 @@ make                         # builds libs
 cd demo; make; ./x.exe       # run the demo
 ```
 
-If you need to run in a docker, please have a look at the [docker setup](https://github.com/MarcToussaint/rai-maintenance/tree/master/docker) I use to test rai. A slight modification of the Dockerfile and run scripts should allow you to setup the appropriate environment also for this repo, including X.
+If you need to run in a docker, please have a look at the
+[docker setup](https://github.com/MarcToussaint/rai-maintenance/tree/master/docker)
+I use to test rai. A slight modification of the Dockerfile and run
+scripts should allow you to setup the appropriate environment also for
+this repo, including X.
