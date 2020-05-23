@@ -1,8 +1,10 @@
 %% compile temporaries
+build
 *.o
 *.a
 *.so
 callgrind.out.*
+
 
 %% EXECUTABLE
 *.exe
@@ -19,12 +21,13 @@ callgrind.out.*
 *.orig
 
 
-# PYTHON
+%% PYTHON
 *.pyc
 _*.py
+.ipynb_checkpoints
 
 
-# EXECUTION
+%% EXECUTION
 core
 CORE
 *.log
@@ -37,7 +40,6 @@ nogit*
 *~
 z.*
 z/
-MT.log
 .#*#
 .#*
 #*#

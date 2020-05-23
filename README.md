@@ -1,12 +1,12 @@
-# ICRA 2020 submission on Describing Physics For Physical Reasoning: Force-based Sequential Manipulation Planning
+# IROS 2020 submission on Describing Physics For Physical Reasoning: Force-based Sequential Manipulation Planning
 
 ## Description
 
-This repository is a the ICRA submission
+This repository is a the RA-L/IROS submission
 > M. Toussaint, JS. Ha, D. Driess:
 > Describing Physics For Physical Reasoning: Force-based Sequential Manipulation Planning
 
-Please also see the [supplementary video](https://www.youtube.com/watch?v=YxKuVit_23E) to get an impression on the method.
+Please see also the [arxiv paper 2002.12780](https://arxiv.org/abs/2002.12780) and the [supplementary video](https://www.youtube.com/watch?v=YxKuVit_23E).
 
 The repository checks out [rai](https://github.com/MarcToussaint/rai/) (as submodule) and allows you to reproduce the experiments.
 
@@ -16,9 +16,7 @@ The 19-ICRA-submission branch contains the literal verion used to
 generate the experiments in the paper (and sometimes raises a "timeout
 to end Thread::main of 'GlfwSpinnerSpi'" when going through all
 examples). The master branch instead uses a newer version of the rai
-submodule. There, the push-with-stick examples converge somewhat worse (one
-should tune other solver parameters in rai.cfg for these). Note that the
-computed trajectories depend on the random seed!
+submodule.
 
 ## Quick Start
 
@@ -30,7 +28,7 @@ git submodule init
 git submodule update
 
 make -j1 installUbuntuAll    # calls sudo apt-get install; you can always interrupt
-make                         # builds libs
+make -j $(command nproc)     # builds libs
 cd demo; make; ./x.exe       # run the demo
 ```
 
